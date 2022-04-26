@@ -1,0 +1,20 @@
+galaxy_info:
+  role_name: brightbox-ruby
+  author: guxiaobai
+  description: Ruby packages for Ubuntu
+
+  license: license (GPL-2.0-or-later, MIT, etc)
+
+  min_ansible_version: 2.1
+
+  platforms:
+  - name: Ubuntu
+    versions:
+      - focal
+
+  galaxy_tags: ['ruby', 'brightbox']
+  
+dependencies: []
+
+collections:
+- community.general

@@ -1,0 +1,30 @@
+---
+- name: Installing the dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_flattened:
+    - [software-properties-common, build-essential]
+    - "{{ brightbox_ruby_gems_deps }}"
+
+- name: Adding the repository
+  apt_repository:
+    repo: "ppa:brightbox/ruby-ng"
+
+- name: Installing the packages
+  apt:
+    name:
+      - ruby-switch
+      - ruby{{ brightbox_ruby_version | mandatory }}
+      - ruby{{ brightbox_ruby_version }}-dev
+      - ruby{{ brightbox_ruby_version }}-doc
+
+- name: Installing the gems
+  community.general.gem:
+    executable: gem{{ brightbox_ruby_version }}
+    name: "{{ item }}"
+    user_install: no
+    state: latest
+  with_flattened:
+    - [bundler]
+    - "{{ brightbox_ruby_gems }}"
